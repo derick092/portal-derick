@@ -1,50 +1,101 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Portal Derick Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Tecnologias e dependências
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+- Utilizar .NET 10 e a versão padrão correspondente do C#.
+- Utilizar ASP.NET Core Minimal APIs para endpoints HTTP.
+- Utilizar Blazor Web App para a interface, quando essa etapa for iniciada.
+- Utilizar SQLite com Entity Framework Core para persistência.
+- Utilizar xUnit para testes automatizados.
+- Justificar a escolha do mecanismo de autenticação no planejamento técnico, conforme os
+  requisitos da especificação.
+- Priorizar recursos nativos do .NET e bibliotecas oficiais da Microsoft quando atenderem
+  adequadamente aos requisitos.
+- Preferir soluções simples, consolidadas e de fácil manutenção, evitando dependências externas
+  desnecessárias. Bibliotecas externas são aceitáveis quando seus benefícios justificarem os
+  custos de manutenção, segurança, compatibilidade e complexidade, inclusive em comparação com
+  uma implementação própria.
+- Justificar tecnicamente novas dependências; sua introdução ou mudança de versão exige
+  autorização conforme as regras operacionais do projeto. Serviços pagos e dependências
+  comerciais exigem aprovação explícita.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Arquitetura e simplicidade
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+- Adotar Clean Architecture como padrão arquitetural, organizando inicialmente a solução em
+  projetos separados: PortalDerick.Domain, PortalDerick.Application, PortalDerick.Infrastructure
+  e PortalDerick.Api.
+- Respeitar a direção das dependências e manter as regras de negócio independentes de mecanismos
+  de persistência e de interfaces externas.
+- Manter regras de negócio fora dos endpoints HTTP; endpoints não devem acessar diretamente o
+  banco de dados.
+- Organizar comportamentos de aplicação em casos de uso quando isso tornar claras suas
+  responsabilidades, sem exigir classes ou abstrações artificiais para operações triviais.
+- Criar interfaces, repositórios e outras abstrações somente quando houver necessidade concreta.
+- Priorizar soluções simples que atendam aos requisitos atuais; aumentar a complexidade somente
+  diante de necessidade demonstrável.
+- Adicionar outros projetos, como PortalDerick.Web, conforme a evolução aprovada do sistema,
+  preservando a consistência arquitetural.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Segurança
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+- Aplicar autenticação e autorização aos recursos protegidos, de acordo com os requisitos de
+  cada funcionalidade.
+- Validar entradas e tratar dados externos como não confiáveis; utilizar os mecanismos de
+  proteção adequados às interfaces e operações expostas.
+- Nunca armazenar segredos, credenciais, tokens ou chaves privadas diretamente no código-fonte
+  ou em arquivos versionados.
+- Utilizar .NET User Secrets no desenvolvimento e mecanismos adequados em produção, como
+  variáveis de ambiente ou gerenciadores de segredos.
+- Não registrar informações sensíveis em logs nem expô-las desnecessariamente em respostas de
+  erro.
+- Avaliar riscos de segurança relevantes no planejamento e na validação das funcionalidades,
+  sem presumir controles não exigidos pelo contexto.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Convenções, qualidade e testes
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+- Seguir as convenções oficiais aplicáveis de nomenclatura, formatação e estilo de C# e .NET da
+  Microsoft, concretizando as regras automatizáveis em um .editorconfig versionado e revisado
+  pelo projeto.
+- Manter consistência com as convenções aprovadas do repositório, desde que não contrariem esta
+  Constitution.
+- Utilizar recursos estáveis e compatíveis com a stack adotada, sem introduzir complexidade
+  desnecessária.
+- Implementar testes automatizados para regras de negócio, comportamentos relevantes e
+  cenários críticos.
+- Utilizar testes unitários e de integração conforme a necessidade, priorizando verificações
+  confiáveis e significativas, sem percentual mínimo obrigatório de cobertura.
+- Utilizar injeção de dependências para serviços com dependências, de maneira proporcional à
+  solução.
+- Implementar logs estruturados utilizando ILogger, evitando exposição de informações sensíveis.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Desempenho e escalabilidade
+
+- Projetar para as necessidades e o volume esperados do Portal Derick, sem introduzir
+  infraestrutura ou mecanismos de escalabilidade antecipadamente.
+- Evitar consultas, transferências de dados e processamento desnecessários, especialmente em
+  caminhos de uso frequente.
+- Medir ou demonstrar gargalos antes de introduzir otimizações complexas, caches ou novos
+  componentes de infraestrutura.
+- Estabelecer metas quantitativas de desempenho e capacidade apenas quando houver requisitos
+  ou evidências que as justifiquem.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+- Esta Constitution orienta as decisões técnicas e prevalece sobre convenções locais e planos
+  que a contradigam.
+- Decisões específicas de funcionalidades pertencem às respectivas especificações e planos
+  técnicos, respeitando estes princípios.
+- Alterações desta Constitution exigem justificativa, avaliação de impacto e aprovação explícita
+  do usuário.
+- Exceções aos princípios devem ser identificadas, justificadas e aprovadas antes de sua adoção;
+  quando representarem mudança permanente, devem resultar em emenda à Constitution.
+- Divergências relevantes devem ser resolvidas antes da conclusão das tarefas afetadas.
+- Versionar emendas conforme versionamento semântico: MAJOR para remoções ou redefinições
+  incompatíveis de princípios ou governança; MINOR para novos princípios, seções ou ampliações
+  materiais das diretrizes; PATCH para esclarecimentos e correções sem mudança de significado.
+- Revisar a conformidade com esta Constitution durante o planejamento técnico e a validação das
+  tarefas afetadas, registrando divergências e exceções para aprovação do usuário.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-11-22 | **Last Amended**: 2026-11-22
