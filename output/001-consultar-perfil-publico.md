@@ -77,3 +77,23 @@ Somente documentação. A consulta distingue perfil ausente de opcionais ausente
 - **Validação:** leitura da Constitution 1.1.0 e dos quatro artefatos; consulta às referências oficiais Microsoft/Scalar registradas em research.md; verificação PowerShell passou nos quatro arquivos para dependências, Development e links locais. git diff --check sem erros, com avisos de normalização LF/CRLF em arquivos já modificados.
 - **Validação funcional:** build/test e acesso HTTP não executados, pois a revisão é documental e não há aplicação implementada. Guia prevê integração em Development, Staging e Production e conferência manual da UI.
 - **Pendências:** revisão do usuário e posterior implementação autorizada, com fixação das versões compatíveis. Nenhuma nova limitação que afete outras especificações; limitação histórica do CLI não reavaliada.
+
+## Geração de tarefas solicitada — 2026-11-22
+
+- **Estado geral:** tarefas geradas e verificadas documentalmente; aguardando revisão do usuário. Implementação não iniciada; nenhuma tarefa T001–T028 executada.
+- **Tarefa:** speckit-tasks — 28 tarefas abertas em seis fases: US1=9, US2=5, US3=3 e compartilhadas=11. Dez oportunidades de paralelismo, condicionadas aos pré-requisitos; dependências e critérios independentes documentados. MVP: fundação + US1; entrega integral exige as três histórias.
+- **Implementação:** somente documentação, mantendo arquitetura, restrições literais do modelo, testes SQLite isolados, migração inicial pontual e OpenAPI/Scalar somente em Development. Autorizações de implementação, dependências e execução de migrações continuam necessárias conforme escopo operacional.
+- **Arquivos:** criado `specs/001-consultar-perfil-publico/tasks.md`; atualizado este relatório. Código, requisitos e plano preservados.
+- **Validação:** `setup-tasks.ps1 -Json` executado com sucesso; documentos técnicos e Constitution lidos. Verificação PowerShell confirmou 28 IDs sequenciais, formato de checklist, labels e caminhos em todas as tarefas; contagens por história e dez marcações [P]. Revisão documental conferiu cobertura FR/SC, 16 combinações, ausência, falhas, unicidade, seed, dependências e ambientes. `git diff --check` passou antes da atualização deste relatório; conferência final executada após a gravação. Uma tentativa de atualização por patch não encontrou a linha de contexto e não alterou o relatório; registro acrescentado preservando o histórico.
+- **Hooks:** `.specify/extensions.yml` ausente nas verificações anterior e posterior; nenhum hook a executar.
+- **Validação funcional:** build/test não aplicáveis à geração documental; aplicação e suíte ainda inexistentes. Nenhuma instalação ou migração executada.
+- **Pendências:** origem governança — revisão do usuário e futura implementação autorizada, estado pendente; impacto: tarefas geradas não equivalem a funcionalidades implementadas. Origem metadados — diferença histórica main/contexto ativo preservada, impacto documental. Limitação histórica do CLI specify não reavaliada; setup PowerShell funcionou. Nenhum novo problema identificado que afete outras especificações.
+
+## Revisão das tarefas solicitada — 2026-11-22
+
+- **Estado geral:** ajustes documentais realizados; aguardando revisão do usuário. Implementação não iniciada; 28 tarefas permanecem abertas.
+- **Tarefa:** revisar T001, T007/T009 e T014/T019 conforme os quatro pontos solicitados, com ajustes de consistência nas notas, T010, checkpoint e dependências.
+- **Implementação:** testes funcionais HTTP usam leitor simulado; SQLite fica em fixture separada para persistência/migração e cenários de reinício, sem duplicar a matriz de 16 combinações. T009 não exige testes de POST/PUT/PATCH/DELETE. US1 implementa e testa o 404 básico; US2 aprofunda ausência/reinício e erros. T001 permite restaurar dependências aprovadas nas versões autorizadas e exige autorização para inclusão ou alteração de versões.
+- **Arquivos modificados:** `specs/001-consultar-perfil-publico/tasks.md` e este relatório. Contrato, plano e demais artefatos preservados.
+- **Validação:** revisão das tarefas afetadas, contagem e sequência dos 28 IDs e `git diff --check`; build/test não aplicáveis à alteração documental. Nenhuma instalação ou migração executada.
+- **Pendências:** origem governança — revisão do usuário e futura implementação autorizada, estado pendente. Nenhuma nova limitação técnica ou impacto identificado em outras especificações.
