@@ -6,6 +6,9 @@
 
 - Utilizar .NET 10 e a versão padrão correspondente do C#.
 - Utilizar ASP.NET Core Minimal APIs para endpoints HTTP.
+- Utilizar OpenAPI para documentar os endpoints HTTP e Scalar como interface interativa dessa
+  documentação. Disponibilizar a interface interativa Scalar exclusivamente no ambiente de
+  desenvolvimento.
 - Utilizar Blazor Web App para a interface, quando essa etapa for iniciada.
 - Utilizar SQLite com Entity Framework Core para persistência.
 - Utilizar xUnit para testes automatizados.
@@ -98,4 +101,4 @@
 - Revisar a conformidade com esta Constitution durante o planejamento técnico e a validação das
   tarefas afetadas, registrando divergências e exceções para aprovação do usuário.
 
-**Version**: 1.0.0 | **Ratified**: 2026-11-22 | **Last Amended**: 2026-11-22
+**Version**: 1.1.0 | **Ratified**: 2026-11-22 | **Last Amended**: 2026-11-22
