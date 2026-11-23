@@ -1,6 +1,6 @@
 # Guia de validação — 001-consultar-perfil-publico
 
-Este guia descreve a execução **após implementação autorizada**. Os projetos e testes indicados ainda não existem. Não interpretar os comandos abaixo como verificações já executadas.
+Este guia descreve a execução **após implementação autorizada**. Os projetos e testes indicados estão implementados. Não interpretar os comandos abaixo como verificações já executadas.
 
 ## Pré-requisitos
 
@@ -88,4 +88,31 @@ Esperado: documento válido contendo a operação pública, respostas 200/404/50
 
 Encerrar o processo. Repetir a inicialização com DOTNET_ENVIRONMENT e ASPNETCORE_ENVIRONMENT definidos como Staging e depois Production, em processos separados. Em ambos, `/openapi/v1.json`, `/scalar` e caminhos subordinados da UI devem retornar 404, e `/api/perfil` deve continuar retornando 200 para o banco preparado. Não executar migrações novamente para essa verificação. Restaurar as variáveis ao estado anterior ao terminar.
 
-Adicionar à suíte de integração os três ambientes, validando status e conteúdo OpenAPI/HTML em Development, indisponibilidade das rotas fora dele e manutenção do comportamento da consulta. Os comandos desta seção são roteiro futuro e não foram executados nesta revisão documental.
+Adicionar à suíte de integração os três ambientes, validando status e conteúdo OpenAPI/HTML em Development, indisponibilidade das rotas fora dele e manutenção do comportamento da consulta. Consultar o relatório da especificação para os comandos efetivamente executados e suas evidências.
+## Estado implementado e comandos verificados (2026-11-23)
+
+A solução utiliza .NET 10 e as versões fixadas nos projetos: EF Core SQLite/Design e dotnet-ef 10.0.11; OpenAPI 10.0.11; Scalar 3.1.1; xunit.v3 4.0.3; adaptador 4.0.1; Test.Sdk 18.12.0; Mvc.Testing 10.0.11. Não são necessárias dependências adicionais.
+
+O código e os testes descritos neste guia estão implementados. Os parágrafos anteriores com linguagem de planejamento devem ser lidos como roteiro operacional; resultados efetivos ficam no relatório da especificação. A conexão é obrigatória ao usar o leitor real e deve ser configurada externamente. Startup/GET não preparam o banco.
+
+Para gerar apenas artefatos, sem aplicar migrações:
+
+```powershell
+$env:ConnectionStrings__PortalDerick = 'Data Source=:memory:'
+dotnet ef migrations has-pending-model-changes --project src/PortalDerick.Infrastructure --startup-project src/PortalDerick.Api
+```
+
+A migração inicial já está versionada no código; não gerar outra para preparar uma instalação. Usar database update somente após autorização específica. Para demonstrações, escolher nome novo com GUID em TEMP em vez de reutilizar arquivo existente:
+
+```powershell
+$demoPath = Join-Path $env:TEMP ('portal-derick-spec001-demo-' + [guid]::NewGuid().ToString('N') + '.db')
+$env:ConnectionStrings__PortalDerick = "Data Source=$demoPath;Pooling=False"
+```
+
+A suíte integral inclui aplicação de migração em arquivo temporário exclusivo, remoção controlada da fixture e limpeza desse arquivo: obter autorização específica antes de executá-la. Para executar apenas as verificações independentes da migração:
+
+```powershell
+dotnet test PortalDerick.slnx --filter 'FullyQualifiedName!~InitialProfileMigrationTests'
+```
+
+Em Development, Scalar redireciona /scalar para /scalar/ e serve recursos próprios sob esse prefixo (por exemplo /scalar/scalar.js e /scalar/scalar.aspnetcore.js). Fora de Development esses caminhos também devem retornar 404. A documentação pode ser acessada sem preparar dados e não consulta o leitor. Falhas do recurso retornam 500 vazio em todos os ambientes; o log estruturado de falha contém somente o identificador da requisição.
