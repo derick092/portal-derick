@@ -1,7 +1,7 @@
 # Tarefas: Consulta pública do perfil profissional
 
 **Entrada:** `specs/001-consultar-perfil-publico/` — spec.md, plan.md, research.md, data-model.md, contracts/public-profile.md e quickstart.md; Constitution 1.1.0.
-**Estado:** T001 concluída e aprovada pelo usuário em 2026-11-22; T002 e T003 implementadas e validadas em seus respectivos escopos, aguardando aprovação final do usuário; T004–T028 permanecem abertas. As execuções exclusivas da T002 e da T003 foram autorizadas pelo usuário; isso não autoriza as demais tarefas.
+**Estado:** T001 concluída e aprovada pelo usuário em 2026-11-22; T002 e T003 implementadas e validadas em seus respectivos escopos; T004 executada e verificada quanto à restauração e compilação, sem testes disponíveis nesta etapa. T002–T004 aguardam aprovação final do usuário; T005–T028 permanecem abertas. A autorização de execução dessas tarefas não autoriza as demais.
 **Organização:** histórias em ordem de prioridade; caminhos relativos à raiz. `[P]` identifica trabalho em arquivos distintos que pode ocorrer em paralelo após seus pré-requisitos. `[USn]` identifica a história correspondente.
 **Testes:** incluídos conforme cenários da especificação e validação exigida pela Constitution, modelo e plano; usar xUnit, leitor simulado nos testes funcionais HTTP e SQLite real isolado nos testes de persistência, sem EF InMemory ou biblioteca de mocks. As 16 combinações de opcionais são verificadas no contrato HTTP, sem repetir essa matriz no SQLite.
 
@@ -12,7 +12,7 @@
 - [X] T001 Levantar versões exatas compatíveis dos pacotes e ferramentas previstos em `specs/001-consultar-perfil-publico/plan.md` (EF Core SQLite/Design 10, dotnet-ef, OpenAPI, Scalar, xUnit, adaptador/SDK e Mvc.Testing), registrar justificativas nesse plano e obter autorização antes de incluir dependências ou alterar versões; permitir a restauração de dependências e ferramentas já aprovadas nas versões autorizadas, sem nova autorização.
 - [X] T002 Após T001 e autorização de implementação, criar `PortalDerick.slnx`, os quatro projetos em `src/PortalDerick.Domain/PortalDerick.Domain.csproj`, `src/PortalDerick.Application/PortalDerick.Application.csproj`, `src/PortalDerick.Infrastructure/PortalDerick.Infrastructure.csproj`, `src/PortalDerick.Api/PortalDerick.Api.csproj` e o projeto `tests/PortalDerick.Tests/PortalDerick.Tests.csproj`; usar net10.0, nullable e referências na direção do plano, adicionando somente pacotes com versões autorizadas e manifesto local `.config/dotnet-tools.json` para dotnet-ef.
 - [X] T003 [P] Concretizar convenções C#/.NET em `.editorconfig`, sem novas ferramentas, e ignorar bin/obj, arquivos SQLite e auxiliares em `.gitignore`, preservando regras existentes.
-- [ ] T004 Restaurar ferramentas/pacotes, compilar e executar a suíte inicial de `PortalDerick.slnx` conforme quickstart; registrar comandos, resultados e eventuais falhas preexistentes em `output/001-consultar-perfil-publico.md` antes de avançar.
+- [X] T004 Restaurar ferramentas/pacotes, compilar e executar a suíte inicial de `PortalDerick.slnx` conforme quickstart; registrar comandos, resultados e eventuais falhas preexistentes em `output/001-consultar-perfil-publico.md` antes de avançar.
 
 ## Fase 2: Fundação compartilhada
 

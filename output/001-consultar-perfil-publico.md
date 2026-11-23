@@ -142,3 +142,20 @@ Somente documentação. A consulta distingue perfil ausente de opcionais ausente
 - **Hooks:** .specify/extensions.yml ausente antes e após execução; nenhum hook a executar.
 - **Pendências:** origem governança — aprovação final da T003 pelo usuário, pendente. Origem T002 — necessidade de ignorar artefatos bin/obj resolvida sem exclusões. Origem tarefas futuras — não há testes implementados; restauração da ferramenta e validação inicial abrangente continuam na T004, não executada. Sem novas falhas ou impacto negativo identificado em outras especificações; as convenções raiz também se aplicarão a código futuro.
 - **Limites:** sem dependências/ferramentas novas, alterações de versões, instalações, restaurações, migrações, commits, pushes ou deploys. Build/test executados somente como verificação da T003.
+## Execução exclusiva da T004 — 2026-11-22
+
+- **Estado geral:** T004 executada no escopo de preparação inicial; restaurações e compilação verificadas, comando de testes executado sem casos disponíveis. Aguardando aprovação final do usuário; T005–T028 não executadas.
+- **Tarefa:** T004 marcada `[X]` como execução registrada, sem representar aprovação final nem validação funcional da especificação.
+- **Implementação:** restaurados exclusivamente ferramenta e pacotes nas versões já aprovadas na T001, sem modificar manifesto, projetos, dependências ou versões. O aviso do CLI de que existe dotnet-ef 11.0.0 não foi tratado como autorização de atualização; mantida a versão 10.0.11.
+- **Arquivos:** modificados somente specs/001-consultar-perfil-publico/tasks.md e este relatório, preservando histórico. Restauração/compilação geraram ou atualizaram artefatos locais ignorados em bin/obj e caches de ferramentas/pacotes. Nenhum arquivo fonte alterado.
+- **Pré-verificações:** git status --short inicialmente limpo; check-prerequisites.ps1 -Json -RequireTasks -IncludeTasks retornou a feature correta (código 0); requirements.md com 16/16 itens marcados, zero pendentes. Quickstart, tarefa, manifesto e configuração de testes conferidos; somente AGENTS.md raiz encontrado. Regras existentes de ignore mantidas e verificadas para bin/obj.
+- **Validação — comandos e resultados:**
+  - dotnet tool restore: tentativa no sandbox falhou ao ler NuGet.Config do usuário por acesso negado (código 1); repetição com permissão ampliada passou (código 0), restaurando dotnet-ef 10.0.11.
+  - dotnet restore PortalDerick.slnx: tentativa no sandbox falhou pelo mesmo acesso negado (código 1); repetição com permissão ampliada passou (código 0), todos os projetos atualizados para restauração.
+  - dotnet build PortalDerick.slnx --no-restore: passou (código 0), cinco projetos compilados, zero avisos e zero erros.
+  - dotnet test PortalDerick.slnx --no-build: executado (código 0); encontrou o assembly de testes net10.0, mas informou que não há testes disponíveis. Nenhum teste foi declarado aprovado; não foram criados testes artificiais ou antecipados de outras tarefas.
+  - dotnet tool run dotnet-ef --version: passou (código 0), confirmou versão efetivamente executável 10.0.11; nenhuma operação de banco executada.
+  - git check-ignore confirmou os artefatos Api/bin e Api/obj ignorados; git diff --check executado após o registro.
+- **Hooks:** .specify/extensions.yml ausente antes e após execução; nenhum hook a executar.
+- **Pendências:** origem ambiente — restrição de acesso ao NuGet.Config no sandbox, contornada pela execução autorizada com permissão ampliada; restaurações posteriores podem precisar da mesma permissão. Origem etapa inicial — ausência preexistente de testes, já observada em T002/T003, permanece como limitação: execução com código 0 não comprova comportamentos HTTP, persistência ou migrações, cuja implementação pertence às tarefas futuras. Origem governança — aprovação final da T004 pelo usuário, pendente. Sem novas falhas de build ou problemas identificados que afetem outras especificações.
+- **Limites:** nenhuma outra tarefa, atualização de dependência, migração, escrita em banco, alteração de infraestrutura, exclusão, commit, push ou deploy executado. Nenhuma consulta ou demonstração funcional antecipada.
