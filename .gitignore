@@ -1,0 +1,44 @@
+# Compilação e testes .NET
+[Bb]in/
+[Oo]bj/
+[Pp]ackages/
+[Tt]est[Rr]esults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Estado local de IDEs e editores
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Bancos SQLite locais e arquivos auxiliares de transação
+*.db
+*.db3
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+*.db3-journal
+*.db3-wal
+*.db3-shm
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm
+
+# Arquivos temporários, logs e configuração local sensível
+*.log
+*.tmp
+*.swp
+*~
+.env*
+.DS_Store
+Thumbs.db

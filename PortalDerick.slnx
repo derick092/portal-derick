@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/PortalDerick.Domain/PortalDerick.Domain.csproj" />
+    <Project Path="src/PortalDerick.Application/PortalDerick.Application.csproj" />
+    <Project Path="src/PortalDerick.Infrastructure/PortalDerick.Infrastructure.csproj" />
+    <Project Path="src/PortalDerick.Api/PortalDerick.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/PortalDerick.Tests/PortalDerick.Tests.csproj" />
+  </Folder>
+</Solution>
